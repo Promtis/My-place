@@ -108,8 +108,12 @@
                 elementTotal.innerText = moves;
 
                 if (done.length == 40){
-                    alert(`You win in "${moves}" moves`);
-                    doReset();
+                    if (time == 0){
+                        alert(`Maybe you should press "start"?`);  
+                    }else{
+                        alert(`You won in ${moves} moves and spent ${time} seconds`);
+                        doReset();}
+                    
                 }
             }
             
