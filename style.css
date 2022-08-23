@@ -1,0 +1,38 @@
+.reset {
+    height: 50px;
+    width: 500px; 
+}
+.wrapper {
+    display: inline-block;
+    width: 720px;
+}
+.normal, .chosen, .correct, .starting {
+    border-radius: 25px;
+    text-align: center;
+    line-height: 50px;
+    display: inline-block;
+    height: 50px;
+    width: 50px;
+    border: 1px solid beige;
+    margin: 10px;
+    transition: background-color 1s;
+    cursor: pointer;
+}
+.normal {
+    background-color: black;
+    color: black;
+    transition: background-color 4s, color 4s;
+}
+.chosen {
+    background-color: brown;
+    color: white;
+}
+.correct{
+    background-color: chartreuse;
+    color: black;
+}
+.starting{
+    background-color: black;
+    color: white;
+    transition: background-color 4s, color 4s;
+}
