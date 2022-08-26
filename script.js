@@ -4,49 +4,50 @@ let time = 0;
 let elementTime;
 let timer;
 
+const Tokens = [];
+
 const init = () => {
     console.log('onload')
     elementTotal = document.getElementById(`moves`);
     elementTime = document.getElementById(`time`);
 };
 
-let numberSelected = -1;
+let tokenSelected = null;
 const done = [];
-function showAlert(n) {
-    const element = document.getElementById(`e${n}`);
-    
 
-    if (done.includes(n)) return;
+const showAlert = (token) => {
+    const { value } = token;
 
-    if (numberSelected == -1){
-        console.log('You clicked', Diver2[n]);
-        numberSelected = n; 
-        
-        element.className = 'chosen';
-    }else if(numberSelected == n){
-        numberSelected = -1;
-        element.className = 'normal';
+    if (done.includes(value)) return;
+
+    if (tokenSelected === null){
+        console.log('You clicked', token);
+        tokenSelected = token; 
+        token.setChosen();
         return;
+    }
+
+    moves++;
+
+    if (tokenSelected === token){
+        tokenSelected = null;
+        token.setNormal();
     }else{
-        const elementSelected = document.getElementById(`e${numberSelected}`);
-        if (Diver2[numberSelected] == Diver2[n]){
+        if (tokenSelected.value === value){
             console.log('Equal');
-            elementSelected.className = 'correct';
-            element.className = 'correct';
-            var newLength = done.push(n, numberSelected);
-            numberSelected = -1;
-            moves++
+            tokenSelected.setMatched();
+            token.setMatched();
+            var newLength = done.push(value);
+            tokenSelected = null;
         }else{
             console.log('Not equal');
-            element.className = 'chosen';
+            token.setChosen();
             setTimeout(() => {
-                elementSelected.className = 'normal';
-                element.className = 'normal';
-                numberSelected = -1;
+                tokenSelected.setNormal();
+                token.setNormal();
+                tokenSelected = null;
             }, 2000);
-            moves++
         }
-    
     }
     elementTotal.innerText = moves;
 
@@ -77,37 +78,31 @@ function shuffle(array) {
 
     return array;
 }
-let Diver2 = [40];
-for (d = 0; d < 40; d ++){
-        
-    Diver2 [d] = 0;
-    // document.write('<div onclick="showAlert(', Diver2[d], ')">', Diver2[d], '</div>');
-    // document.write('<div onclick="showAlert(', Diver2[d+1], ')">', Diver2[d+1], '</div>');
+
+const container = document.getElementById('container');
+
+for (i = 0; i < 40; i++){
+    Tokens[i] = createToken(showAlert);
+    container.insertAdjacentElement('beforeend', Tokens[i].element);
 }
-for (e = 0; e < 40; e++){
-    document.write(`<div id="e${e}" class="starting" onclick="showAlert(${e})">0</div>`); 
-}
+
 function doReset(){
     function incTimer() {
         time++;
         elementTime.innerText = time;
     }
 
-    for (d = 0; d < 40; d ++){
-        if (d <= 19){
-            Diver2[d] = d+1;
-        }else{
-            Diver2[d] = d-19;
-        }
+    shuffle(Tokens);
+
+    for (i = 0; i < 20; i ++) {
+        Tokens[i].setValue(i + 1);
+        Tokens[i + 20].setValue(i + 1);
     }
 
-    shuffle(Diver2);
-
-    for (e = 0; e < 40; e++){
-        elementReset = document.getElementById(`e${e}`);
-        elementReset.className="starting"; 
-        elementReset.className="normal"; 
-        elementReset.innerText=Diver2[e]; 
+    for (const token of Tokens){
+        token.setStarting(); 
+        token.setNormal(); 
+        token.element.innerText = token.value; 
     }
     
     if (timer) {

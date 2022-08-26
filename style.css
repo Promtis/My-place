@@ -1,3 +1,6 @@
+body{
+    background-color:dimgrey;
+    }
 .reset {
     height: 50px;
     width: 500px; 
@@ -21,7 +24,6 @@
 .normal {
     background-color: black;
     color: black;
-    transition: background-color 4s, color 4s;
 }
 .chosen {
     background-color: brown;
@@ -34,5 +36,4 @@
 .starting{
     background-color: black;
     color: white;
-    transition: background-color 4s, color 4s;
 }
