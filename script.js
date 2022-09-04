@@ -61,7 +61,7 @@ const showAlert = (token) => {
     }
 }
 
-function shuffle(array) {
+const shuffle = (array) => {
     let currentIndex = array.length,  randomIndex;
 
      // While there remain elements to shuffle...
@@ -86,7 +86,7 @@ for (i = 0; i < 40; i++){
     container.insertAdjacentElement('beforeend', Tokens[i].element);
 }
 
-function doReset(){
+const doReset = () => {
     function incTimer() {
         time++;
         elementTime.innerText = time;

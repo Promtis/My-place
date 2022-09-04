@@ -21,7 +21,7 @@ const protoToken = {
     
 };
 
-function createToken(onclick) {
+const createToken = (onclick) =>  {
     const token = Object.create(protoToken);
     const element = document.createElement('div');
 
