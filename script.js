@@ -1,10 +1,10 @@
 let elementTotal;
 let moves = 0;
-let time = 0;
 let elementTime;
-let timer;
+let tokenSelected = null;
 
 const Tokens = [];
+const container = document.getElementById('container');
 
 const init = () => {
     console.log('onload')
@@ -12,7 +12,8 @@ const init = () => {
     elementTime = document.getElementById(`time`);
 };
 
-let tokenSelected = null;
+const timer = timeRun(document.getElementById(`time`));
+
 const done = [];
 
 const showAlert = (token) => {
@@ -51,27 +52,27 @@ const showAlert = (token) => {
     }
     elementTotal.innerText = moves;
 
-    if (done.length == 40){
-        if (time == 0){
-            alert(`Maybe you should press "start"?`);  
-        }else{
-            alert(`You won in ${moves} moves and spent ${time} seconds`);
-            doReset();}
-        
+    if (done.length == 20) {
+        if (timer.getSeconds() == 0) {
+            alert(`Maybe you should click "start"?`);  
+        } else {
+            alert(`You won in ${moves} moves and spent ${timer.getSeconds()} seconds`);
+            timer.stop();
+        }
     }
 }
 
 const shuffle = (array) => {
     let currentIndex = array.length,  randomIndex;
 
-     // While there remain elements to shuffle...
+
     while (currentIndex != 0) {
 
-        // Pick a remaining element...
+
         randomIndex = Math.floor(Math.random() * currentIndex);
         currentIndex--;
 
-        // And swap it with the current element.
+       
         [array[currentIndex], array[randomIndex]] = [
         array[randomIndex], array[currentIndex]];
     }
@@ -79,18 +80,8 @@ const shuffle = (array) => {
     return array;
 }
 
-const container = document.getElementById('container');
-
-for (i = 0; i < 40; i++){
-    Tokens[i] = createToken(showAlert);
-    container.insertAdjacentElement('beforeend', Tokens[i].element);
-}
-
 const doReset = () => {
-    function incTimer() {
-        time++;
-        elementTime.innerText = time;
-    }
+    timer.start();
 
     shuffle(Tokens);
 
@@ -102,19 +93,16 @@ const doReset = () => {
     for (const token of Tokens){
         token.setStarting(); 
         token.setNormal(); 
-        token.element.innerText = token.value; 
     }
-    
-    if (timer) {
-        clearInterval(timer);
-    }
-    timer = setInterval(incTimer, 1000);
     
     moves = 0;
     done.length = 0;
-    time = 0;
-    elementTime.innerText = time;
     elementTotal.innerText = moves;
     elementStart = document.getElementById("resButton");
     elementStart.innerText="Reset"; 
+}
+
+for (i = 0; i < 40; i++){
+    Tokens[i] = createToken(showAlert);
+    container.insertAdjacentElement('beforeend', Tokens[i].element);
 }

@@ -4,6 +4,7 @@ const protoToken = {
 
     setValue(value) {
         this.value = value;
+        this.element.innerText = value; 
     },
 
     setMatched() {
