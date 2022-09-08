@@ -3,9 +3,11 @@ const createTimer = elementTime => {
     let seconds = 0;
 
     const start = () => {
-      if (!interval)
+      //if (!interval){
+        clearInterval(interval);
+        interval = null;
       seconds = 0;
-      elementTime.innerText = seconds; 
+      elementTime.innerText = 0; 
       interval = setInterval(tick, 1000);
     };
 

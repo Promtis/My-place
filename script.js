@@ -2,6 +2,7 @@ let elementTotal;
 let moves = 0;
 let elementTime;
 let tokenSelected = null;
+let pairs;
 
 const Tokens = [];
 const container = document.getElementById('container');
@@ -12,7 +13,7 @@ const init = () => {
     elementTime = document.getElementById(`time`);
 };
 
-const timer = timeRun(document.getElementById(`time`));
+const timer = createTimer(document.getElementById(`time`));
 
 const done = [];
 
@@ -52,7 +53,7 @@ const showAlert = (token) => {
     }
     elementTotal.innerText = moves;
 
-    if (done.length == 20) {
+    if (done.length == pairs) {
         if (timer.getSeconds() == 0) {
             alert(`Maybe you should click "start"?`);  
         } else {
@@ -80,14 +81,39 @@ const shuffle = (array) => {
     return array;
 }
 
+
+
 const doReset = () => {
     timer.start();
+    
+    Tokens.length = 0;
+
+    pairs = parseInt(document.getElementById("pairs").value);
+    
+    if (pairs >= 1 && pairs <= 50){
+
+    }else{
+        pairs = 10;
+        alert('Your number to big, invalid or you just didn`t enter it. Let`s try 10)')
+    }
+
+    let child = container.lastElementChild;
+
+    while (child) {
+        container.removeChild(child);
+        child = container.lastElementChild;
+    }
+
+    for (i = 0; i < pairs*2; i++){
+        Tokens[i] = createToken(showAlert);
+        container.insertAdjacentElement('beforeend', Tokens[i].element);
+    }
 
     shuffle(Tokens);
 
-    for (i = 0; i < 20; i ++) {
+    for (i = 0; i < pairs; i ++) {
         Tokens[i].setValue(i + 1);
-        Tokens[i + 20].setValue(i + 1);
+        Tokens[i + pairs].setValue(i + 1);
     }
 
     for (const token of Tokens){
@@ -100,9 +126,7 @@ const doReset = () => {
     elementTotal.innerText = moves;
     elementStart = document.getElementById("resButton");
     elementStart.innerText="Reset"; 
+    
+   
 }
 
-for (i = 0; i < 40; i++){
-    Tokens[i] = createToken(showAlert);
-    container.insertAdjacentElement('beforeend', Tokens[i].element);
-}
