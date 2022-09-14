@@ -20,6 +20,7 @@ body{
     margin: 10px;
     transition: background-color 1s;
     cursor: pointer;
+    transition: 1s
 }
 .normal {
     background-color: black;

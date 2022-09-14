@@ -84,7 +84,8 @@ const shuffle = (array) => {
 
 
 const doReset = () => {
-    timer.start();
+    timer.stop();
+    elementTime.innerText = 0; 
     
     Tokens.length = 0;
 
@@ -116,16 +117,17 @@ const doReset = () => {
         Tokens[i + pairCount].setValue(i + 1);
     }
 
-    for (const token of Tokens){
-        token.setStarting(); 
-        token.setNormal(); 
-    }
-    
+    setTimeout(() => {
+        for (const token of Tokens){ 
+            token.setNormal(); 
+        }
+        timer.start();
+    }, 3000);
     moves = 0;
     done.length = 0;
     elementTotal.innerText = moves;
     elementStart = document.getElementById("resButton");
-    elementStart.innerText="Reset"; 
+    elementStart.innerText="Restart"; 
     
    
 }

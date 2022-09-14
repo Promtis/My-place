@@ -4,8 +4,8 @@ const createTimer = elementTime => {
 
     const start = () => {
       //if (!interval){
-        clearInterval(interval);
-        interval = null;
+      clearInterval(interval);
+      interval = null;
       seconds = 0;
       elementTime.innerText = 0; 
       interval = setInterval(tick, 1000);
