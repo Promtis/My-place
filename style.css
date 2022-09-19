@@ -1,5 +1,5 @@
 body{
-    background-color:dimgrey;
+    background-color: #aaa;
     }
 .reset {
     height: 50px;
@@ -14,9 +14,9 @@ body{
     text-align: center;
     line-height: 50px;
     display: inline-block;
-    height: 50px;
-    width: 50px;
-    border: 1px solid beige;
+    height: 40px;
+    width: 40px;
+    border: 10px solid beige;
     margin: 10px;
     transition: background-color 1s;
     cursor: pointer;
@@ -24,17 +24,11 @@ body{
 }
 .normal {
     background-color: black;
-    color: black;
+    border-color: black;
 }
 .chosen {
-    background-color: brown;
-    color: white;
+    border-color: black;
 }
 .correct{
-    background-color: chartreuse;
-    color: black;
-}
-.starting{
-    background-color: black;
-    color: white;
+    border-color:chartreuse;
 }

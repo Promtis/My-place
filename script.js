@@ -39,7 +39,7 @@ const showAlert = (token) => {
             console.log('Equal');
             tokenSelected.setMatched();
             token.setMatched();
-            var newLength = done.push(value);
+            var newLength = done.push();
             tokenSelected = null;
         }else{
             console.log('Not equal');
@@ -81,7 +81,7 @@ const shuffle = (array) => {
     return array;
 }
 
-
+const toHex = (decimal) => `#${decimal.toString(16).padStart(6,"0")}`;
 
 const doReset = () => {
     timer.stop();
@@ -98,12 +98,16 @@ const doReset = () => {
         alert('Your number to big, invalid or you just didn`t enter it. Let`s try 10)')
     }
 
+    const stepColor = Math.floor(16777164 / pairCount);
+
     let child = container.lastElementChild;
 
     while (child) {
         container.removeChild(child);
         child = container.lastElementChild;
     }
+
+    let colorCurrent = 51;
 
     for (i = 0; i < pairCount*2; i++){
         Tokens[i] = createToken(showAlert);
@@ -113,8 +117,11 @@ const doReset = () => {
     shuffle(Tokens);
 
     for (i = 0; i < pairCount; i ++) {
-        Tokens[i].setValue(i + 1);
-        Tokens[i + pairCount].setValue(i + 1);
+        Tokens[i].setValue(toHex(colorCurrent));
+        Tokens[i + pairCount].setValue(toHex(colorCurrent));
+        colorCurrent += stepColor;
+        Tokens[i].setStarting();
+        Tokens[i + pairCount].setStarting();
     }
 
     setTimeout(() => {

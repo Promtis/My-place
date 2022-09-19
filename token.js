@@ -4,20 +4,23 @@ const protoToken = {
 
     setValue(value) {
         this.value = value;
-        this.element.innerText = value; 
     },
 
     setMatched() {
-        this.element.className = 'correct';
+        this.element.style.backgroundColor = this.value;
+        this.element.style.borderColor = `#66ff33`;
     },
     setNormal(){
-        this.element.className = 'normal';
+        this.element.style.backgroundColor = `#000000`;
+        this.element.style.borderColor = `#000000`;
     },
     setChosen(){
-        this.element.className = 'chosen';
+        this.element.style.backgroundColor = this.value;
+        this.element.style.borderColor = `#000000`;
     },
     setStarting(){
-        this.element.className = 'starting';
+        this.element.style.backgroundColor = this.value;
+        this.element.style.borderColor = this.value;
     }
     
 };
@@ -31,7 +34,5 @@ const createToken = (onclick) =>  {
     element.onclick = () => {
         onclick(token);
     }
-    element.innerText = token.value;
-
     return token;
   }
