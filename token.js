@@ -8,15 +8,15 @@ const protoToken = {
 
     setMatched() {
         this.element.style.backgroundColor = this.value;
-        this.element.style.borderColor = `#66ff33`;
+        this.element.style.borderColor = '#66ff33';
     },
     setNormal(){
-        this.element.style.backgroundColor = `#000000`;
-        this.element.style.borderColor = `#000000`;
+        this.element.style.backgroundColor = '#000000';
+        this.element.style.borderColor = '#000000';
     },
     setChosen(){
         this.element.style.backgroundColor = this.value;
-        this.element.style.borderColor = `#000000`;
+        this.element.style.borderColor = '#000000';
     },
     setStarting(){
         this.element.style.backgroundColor = this.value;

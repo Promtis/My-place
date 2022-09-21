@@ -6,6 +6,7 @@ let pairCount = 10;
 
 const Tokens = [];
 const container = document.getElementById('container');
+const stepColor = Math.floor(16777164 / pairCount);
 
 const init = () => {
     console.log('onload')
@@ -39,7 +40,7 @@ const showAlert = (token) => {
             console.log('Equal');
             tokenSelected.setMatched();
             token.setMatched();
-            var newLength = done.push();
+            let newLength = done.push();
             tokenSelected = null;
         }else{
             console.log('Not equal');
@@ -81,7 +82,8 @@ const shuffle = (array) => {
     return array;
 }
 
-const toHex = (decimal) => `#${decimal.toString(16).padStart(6,"0")}`;
+const decimalToHex = decimal => `#${decimal.toString(16).padStart(6,"0")}`;
+const setColor = colorNumber => setValue(decimalToHex(colorNumber));
 
 const doReset = () => {
     timer.stop();
@@ -98,7 +100,7 @@ const doReset = () => {
         alert('Your number to big, invalid or you just didn`t enter it. Let`s try 10)')
     }
 
-    const stepColor = Math.floor(16777164 / pairCount);
+    
 
     let child = container.lastElementChild;
 
@@ -117,8 +119,8 @@ const doReset = () => {
     shuffle(Tokens);
 
     for (i = 0; i < pairCount; i ++) {
-        Tokens[i].setValue(toHex(colorCurrent));
-        Tokens[i + pairCount].setValue(toHex(colorCurrent));
+        Tokens[i].setColor(colorCurrent);
+        Tokens[i + pairCount].setColor(colorCurrent);
         colorCurrent += stepColor;
         Tokens[i].setStarting();
         Tokens[i + pairCount].setStarting();
