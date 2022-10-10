@@ -33,12 +33,5 @@ const config = {
 };
 
 module.exports = () => {
-    if (isDevelopment) {
-        config.mode = 'development';
-        
-        
-    } else {
-        config.mode = 'development';
-    }
     return config;
 };

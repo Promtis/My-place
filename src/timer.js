@@ -1,4 +1,4 @@
-const createTimer = elementTime => {
+export const createTimer = elementTime => {
     let interval = null;
     let seconds = 0;
 
@@ -29,4 +29,3 @@ const createTimer = elementTime => {
       getSeconds,
     }
   };
-  export {createTimer};
