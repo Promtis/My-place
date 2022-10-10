@@ -2,9 +2,6 @@
 
 const path = require('path');
 
-const isDevelopment = process.env.NODE_ENV == 'development';
-
-
 const config = {
     devtool: 'source-map',
     entry: './src/index.js',
@@ -32,6 +29,4 @@ const config = {
     },
 };
 
-module.exports = () => {
-    return config;
-};
+module.exports = () => config;
